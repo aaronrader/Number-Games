@@ -1,0 +1,96 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+  background-color: #282c34 !important;
+}
+
+.header {
+  justify-content: center;
+  align-items: center;
+  font-size: calc(5px + 2vmin);
+  position: static !important;
+  background-color: #282c34 !important;
+}
+
+.content {
+  box-sizing: border-box;
+  display: flex;
+  flex-grow: 1;
+  width: 90vw;
+  background-color: #fff !important;
+  justify-content: center;
+}
+
+.gamePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  padding: 1vmin;
+}
+
+.footer {
+  justify-content: center;
+  align-items: center;
+  font-size: calc(5px + 2vmin);
+  position: static !important;
+  background-color: #282c34 !important;
+}
+
+.footer h3 {
+  margin: 0;
+}
+
+.gameGroup {
+  display: flex;
+  width: 100%;
+  height: 30vh;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.gameDiv {
+  height: 80%;
+  width: 200px;
+  border-radius: 20px !important;
+}
+
+#menuButton {
+  position: fixed;
+  right: 1vw;
+}
+
+a, a:visited {
+  color: inherit;
+}
+
+ul a {
+  text-decoration: none;
+  width: 100%;
+}
+
+.switchDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1vh;
+}
