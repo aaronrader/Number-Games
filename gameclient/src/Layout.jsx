@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import './style/index.css';
 import { AppBar, IconButton, Toolbar, Menu, MenuItem, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/MenuRounded'
@@ -20,6 +20,12 @@ export default function Layout() {
         <div className="App">
             <AppBar className='header'>
                 <Toolbar>
+                    <Box id='logo'>
+                        <NavLink to='/' style={({}) => ({textDecoration: "none"})}>
+                            <h2>Number Games</h2>
+                            <p>By Aaron Rader</p>
+                        </NavLink>
+                    </Box>
                     <h1>{title}</h1>
                     <IconButton
                         id='menuButton'

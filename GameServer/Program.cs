@@ -1,7 +1,9 @@
 
 using System.Runtime.CompilerServices;
 using System.Text.Json;
+using GameServer.Classes;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Validations;
 using NumberSums.Classes;
 
 namespace NumberSumsServer
@@ -10,16 +12,16 @@ namespace NumberSumsServer
     {
         public static void Main(string[] args)
         {
-            var MyAllowAllOrigins = "_myAllowAllOrigins";
+            var MyAllowLocalOrigins = "_myAllowLocalOrigins";
 
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy(name: MyAllowAllOrigins,
+                options.AddPolicy(name: MyAllowLocalOrigins,
                                   policy =>
                                   {
-                                      policy.AllowAnyOrigin().AllowAnyHeader();
+                                      policy.SetIsOriginAllowed(origin => new Uri(origin).IsLoopback).AllowAnyHeader();
                                   });
             });
 
@@ -41,7 +43,19 @@ namespace NumberSumsServer
 
             app.UseHttpsRedirection();
 
-            app.UseCors(MyAllowAllOrigins);
+            app.UseCors(MyAllowLocalOrigins);
+
+            app.MapGet("/games", () =>
+            {
+                var gameList = new GameInfo[]
+                {
+                    new() {Name = "Number Sums", Endpoint = "/numSums"},
+                    //new() {Name = "Sudoku", Endpoint = "/sudoku"}
+                };
+                return Results.Ok(gameList);
+            })
+            .WithName("GetGames")
+            .WithOpenApi();
 
             app.MapGet("/numSums", ([FromQuery] ushort? numRows, [FromQuery] ushort? numCols, [FromQuery] float? density) =>
             {

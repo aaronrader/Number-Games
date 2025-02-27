@@ -24,28 +24,34 @@ div {
 .header {
   justify-content: center;
   align-items: center;
-  font-size: calc(5px + 2vmin);
+  font-size: calc(3px + 2vmin);
   position: static !important;
   background-color: #282c34 !important;
 }
 
-.content {
-  box-sizing: border-box;
-  display: flex;
-  flex-grow: 1;
-  width: 90vw;
-  background-color: #fff !important;
-  justify-content: center;
+#logo {
+  position: fixed;
+  left: 1vw;
+  background-color: #34425f;
+  padding: 10px;
+  border-radius: 30px;
 }
 
-.gamePage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
-  padding: 1vmin;
+#logo h2, #logo p {
+  margin: 0;
+}
+
+#logo h2 {
+  font-size: x-large;
+}
+
+#logo p {
+  font-size: large;
+}
+
+#menuButton {
+  position: fixed;
+  right: 1vw;
 }
 
 .footer {
@@ -58,6 +64,46 @@ div {
 
 .footer h3 {
   margin: 0;
+}
+
+.content {
+  box-sizing: border-box;
+  display: flex;
+  flex-grow: 1;
+  width: 90vw;
+  background-color: #fff !important;
+  justify-content: center;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  padding: 2vmin;
+}
+
+.gameOptions {
+  display: flex;
+  align-items: center;
+  padding: 1vmin;
+  border: 1px solid #bbb;
+  border-radius: 0.5vw
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.switchDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1vh;
 }
 
 .gameGroup {
@@ -74,11 +120,6 @@ div {
   border-radius: 20px !important;
 }
 
-#menuButton {
-  position: fixed;
-  right: 1vw;
-}
-
 a, a:visited {
   color: inherit;
 }
@@ -86,11 +127,4 @@ a, a:visited {
 ul a {
   text-decoration: none;
   width: 100%;
-}
-
-.switchDiv {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 1vh;
 }
