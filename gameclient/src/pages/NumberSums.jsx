@@ -26,6 +26,8 @@ export default function NumberSums(props) {
         clickAction: actions.SELECT,
         selectRows: 8,
         selectCols: 8,
+        numCells: 64,
+        numCorrect: 0,
         numIncorrect: 0
     }
     const reducer = (state, newState) => ({ ...state, ...newState });
@@ -48,6 +50,8 @@ export default function NumberSums(props) {
                     rowCount: data.rowTotals.length,
                     colCount: data.columnTotals.length
                 },
+                numCells: data.rowTotals.length * data.columnTotals.length,
+                numCorrect: 0,
                 numIncorrect: 0
             });
         });
@@ -55,17 +59,33 @@ export default function NumberSums(props) {
         //reset the board
         $(".correct").removeClass("correct");
         $(".wrong").removeClass("wrong");
-        $(".cell").css("visibility", "visible");
+        $(".cell").removeClass("hidden");
         $("#gameOptions").toggle(250);
     }
 
     const checkCell = (cell, e) => {
+        if ($(e).hasClass("correct") || $(e).hasClass("hidden")) return; //dont check cells that have already been checked
+
         if (state.clickAction === actions.SELECT && cell.isCorrect)
             $(e).addClass("correct");
         else if (state.clickAction === actions.ERASE && !cell.isCorrect)
-            $(e).css("visibility", "hidden");
-        else
+            $(e).addClass("hidden");
+        else {
             wrongSelection(e);
+            return;
+        }
+
+        let newCorrect = state.numCorrect + 1;
+        if (newCorrect === state.numCells) {
+            gameWin();
+        }
+
+        setState({numCorrect: newCorrect}); //Increment correct guesses
+    }
+
+    const gameWin = () => {
+        //display winning screen
+        console.log("You win!");
     }
 
     async function wrongSelection(e) {
