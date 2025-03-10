@@ -10,7 +10,6 @@ namespace NumberSums.Classes
     {
         private readonly ushort _nRows;
         private readonly ushort _nColumns;
-
         public Cell[][] Values { get; private set; }
         public ushort[] RowTotals { get; private set; }
         public ushort[] ColumnTotals { get; private set; }

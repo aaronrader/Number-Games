@@ -1,11 +1,12 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import $ from "jquery";
-import { serverUrl } from '../constants';
-import '../style/index.css';
-
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, InputLabel, MenuItem, Select, Switch, Typography } from '@mui/material';
-import NumSumsBoard from '../components/NumSumsBoard';
 import { useOutletContext } from 'react-router-dom';
+
+import { serverUrl } from '../constants';
+import NumSumsBoard from '../components/NumSumsBoard';
+
+import '../style/index.css';
 
 export default function NumberSums(props) {
     /* CONSTANTS */
@@ -36,11 +37,12 @@ export default function NumberSums(props) {
     const [state, setState] = useReducer(reducer, initialState);
     const [modelOpen, setModelOpen] = useState(false);
 
+    /* FUNCTIONS */
     useEffect(() => {
         updateTitle("Number Sums");
         genNewBoard();
         $("#gameOptions").hide();
-    }, [])
+    }, []);
 
     const genNewBoard = () => {
         //replace values with new

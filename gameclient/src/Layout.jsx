@@ -45,6 +45,7 @@ export default function Layout() {
                     >
                         <MenuItem onClick={handleClose}><NavLink to="/">Home</NavLink></MenuItem>
                         <MenuItem onClick={handleClose}><NavLink to="/numsums">Number Sums</NavLink></MenuItem>
+                        <MenuItem onClick={handleClose}><NavLink to="/minesweeper">Minesweeper</NavLink></MenuItem>
                     </Menu>
                 </Toolbar>
             </AppBar>

@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Layout from './Layout';
 import NumberSums from './pages/NumberSums';
 import NotFound from './pages/NotFound';
+import Minesweeper from './pages/Minesweeper';
 
 export default function App() {
 
@@ -16,6 +17,7 @@ export default function App() {
       <Route path='/' element={<Layout />}>
         <Route index element={<Home />} />
         <Route path='numsums' element={<NumberSums />} />
+        <Route path='minesweeper' element={<Minesweeper />} />
         <Route path='*' status={404} element={<NotFound />} />
       </Route>
     </Routes>

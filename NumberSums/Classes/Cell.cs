@@ -11,9 +11,12 @@ namespace NumberSums.Classes
         public bool IsCorrect { get; internal set; }
         public ushort Value { get; internal set; }
 
-        internal Cell(ushort value)
+        internal Cell(ushort value, float density)
         {
+            var rng = new Random();
+
             Value = value;
+            IsCorrect = rng.NextDouble() < density;
         }
 
         public override string ToString()

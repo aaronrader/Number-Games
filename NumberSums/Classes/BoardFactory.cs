@@ -16,14 +16,14 @@ namespace NumberSums.Classes
             get => _nRows;
             set => _nRows = value > 0 && value <= 15
                 ? value
-                : throw new ArgumentOutOfRangeException(nameof(NRows), value, "Number of rows must be a positive integer less than 25.");
+                : throw new ArgumentOutOfRangeException(nameof(NRows), value, "Number of rows must be a positive integer less than 15.");
         }
         public ushort NColumns
         {
             get => _nCols;
             set => _nCols = value > 0 && value <= 15
                 ? value
-                : throw new ArgumentOutOfRangeException(nameof(NColumns), value, "Number of columns must be a positive integer less than 25.");
+                : throw new ArgumentOutOfRangeException(nameof(NColumns), value, "Number of columns must be a positive integer less than 15.");
         }
         public float Density
         {
@@ -49,12 +49,7 @@ namespace NumberSums.Classes
             {
                 for (uint j = 0; j < _nCols; ++j)
                 {
-                    Cell newCell = new Cell((ushort)rng.Next(1, 10));
-                    newCell.IsCorrect = rng.NextDouble() < _density; //decide if that cell should be a "correct" cell
-
-                    values[i][j] = newCell;
-
-                    //if (!newCell.IsCorrect) newCell.Value = 0; //debug
+                    values[i][j] = new Cell((ushort)rng.Next(1, 10), _density);
                 }
             }
 
@@ -94,7 +89,6 @@ namespace NumberSums.Classes
                     }
                 }
             }
-
 
             return new Board(values, rowTotals, colTotals);
         }
