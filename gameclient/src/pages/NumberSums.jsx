@@ -1,13 +1,14 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import $ from "jquery";
 import { serverUrl } from '../constants';
 import '../style/index.css';
 
-import { Box, Button, FormControl, InputLabel, MenuItem, Select, Switch, Typography } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, InputLabel, MenuItem, Select, Switch, Typography } from '@mui/material';
 import NumSumsBoard from '../components/NumSumsBoard';
 import { useOutletContext } from 'react-router-dom';
 
 export default function NumberSums(props) {
+    /* CONSTANTS */
     const updateTitle = useOutletContext();
     const actions = Object.freeze({
         SELECT: 0,
@@ -15,6 +16,7 @@ export default function NumberSums(props) {
     });
     const counts = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]; //min/max rows and columns
 
+    /* STATE */
     const initialState = {
         currentBoard: {
             values: [],
@@ -32,6 +34,7 @@ export default function NumberSums(props) {
     }
     const reducer = (state, newState) => ({ ...state, ...newState });
     const [state, setState] = useReducer(reducer, initialState);
+    const [modelOpen, setModelOpen] = useState(false);
 
     useEffect(() => {
         updateTitle("Number Sums");
@@ -60,7 +63,8 @@ export default function NumberSums(props) {
         $(".correct").removeClass("correct");
         $(".wrong").removeClass("wrong");
         $(".cell").removeClass("hidden");
-        $("#gameOptions").toggle(250);
+        $("#gameOptions").hide(250);
+        setModelOpen(false);
     }
 
     const checkCell = (cell, e) => {
@@ -84,8 +88,7 @@ export default function NumberSums(props) {
     }
 
     const gameWin = () => {
-        //display winning screen
-        console.log("You win!");
+        setModelOpen(true);
     }
 
     async function wrongSelection(e) {
@@ -104,7 +107,7 @@ export default function NumberSums(props) {
     }
 
     return (
-        <div className='page'>
+        <Box className='page'>
             <Box>
                 <Button onClick={() => {$("#gameOptions").toggle(250);}} variant='outlined' sx={{marginBottom: "1vh"}}>New Game</Button>
                 <Box id='gameOptions' className='gameOptions'>
@@ -136,6 +139,21 @@ export default function NumberSums(props) {
             <Box>
                 <Typography>Mistakes: {state.numIncorrect}</Typography>
             </Box>
-        </div>
+
+            <Dialog
+                open={modelOpen}
+                onClose={()=>{setModelOpen(false)}}
+            >
+                <DialogTitle sx={{textAlign: "center"}}>You Win!</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Mistakes Made: {state.numIncorrect}
+                    </DialogContentText>
+                    <DialogActions>
+                        <Button onClick={genNewBoard}>New Game</Button>
+                    </DialogActions>
+                </DialogContent>
+            </Dialog>
+        </Box>
     )
 }

@@ -1,28 +1,23 @@
-
-using System.Runtime.CompilerServices;
-using System.Text.Json;
 using GameServer.Classes;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.OpenApi.Validations;
 using NumberSums.Classes;
 
-namespace NumberSumsServer
+namespace GameServer
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            var MyAllowLocalOrigins = "_myAllowLocalOrigins";
+            var CorsPolicy = "AllowLocalOrigins";
 
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy(name: MyAllowLocalOrigins,
-                                  policy =>
-                                  {
-                                      policy.SetIsOriginAllowed(origin => new Uri(origin).IsLoopback).AllowAnyHeader();
-                                  });
+                options.AddPolicy(name: CorsPolicy, policy =>
+                {
+                    policy.SetIsOriginAllowed(origin => new Uri(origin).IsLoopback).AllowAnyHeader();
+                });
             });
 
             // Add services to the container.
@@ -43,7 +38,7 @@ namespace NumberSumsServer
 
             app.UseHttpsRedirection();
 
-            app.UseCors(MyAllowLocalOrigins);
+            app.UseCors(CorsPolicy);
 
             app.MapGet("/games", () =>
             {
@@ -64,9 +59,9 @@ namespace NumberSumsServer
 
                 try
                 {
-                    factory.NRows = numRows ?? 8;
-                    factory.NColumns = numCols ?? 8;
-                    factory.Density = density ?? 0.3f;
+                    if (numRows is not null) factory.NRows = (ushort)numRows;
+                    if (numCols is not null) factory.NColumns = (ushort)numCols;
+                    if (density is not null) factory.Density = (ushort)density;
                     gameBoard = factory.Generate();
                 } catch (Exception e) { return Results.BadRequest(e.Message); }
 
