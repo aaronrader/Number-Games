@@ -115,13 +115,13 @@ export default function NumberSums(props) {
                 <Box id='gameOptions' className='gameOptions'>
                         <FormControl size='small' sx={{ margin: "1vh" }}>
                             <InputLabel id="rowSelectLabel">Rows</InputLabel>
-                            <Select sx={{ minWidth: "10vw" }} labelId='rowSelectLabel' label="Rows" value={state.selectRows} onChange={(e) => { setState({ selectRows: e.target.value }) }}>
+                            <Select sx={{ width: "6vw" }} labelId='rowSelectLabel' label="Rows" value={state.selectRows} onChange={(e) => { setState({ selectRows: e.target.value }) }}>
                                 {counts.map((count) => (<MenuItem key={count} value={count}>{count}</MenuItem>))}
                             </Select>
                         </FormControl>
                         <FormControl size='small' sx={{ margin: "1vh" }}>
                             <InputLabel id="colSelectLabel">Columns</InputLabel>
-                            <Select sx={{ minWidth: "10vw" }} labelId='colSelectLabel' label="Columns" value={state.selectCols} onChange={(e) => { setState({ selectCols: e.target.value }) }}>
+                            <Select sx={{ width: "6vw" }} labelId='colSelectLabel' label="Columns" value={state.selectCols} onChange={(e) => { setState({ selectCols: e.target.value }) }}>
                                 {counts.map((count) => (<MenuItem key={count} value={count}>{count}</MenuItem>))}
                             </Select>
                         </FormControl>

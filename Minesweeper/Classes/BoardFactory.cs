@@ -8,9 +8,9 @@ namespace Minesweeper.Classes
 {
     public class BoardFactory
     {
-        private ushort _nRows = 8;
-        private ushort _nCols = 8;
-        private float _density = 0.3f; //the approximate proportion of non-zero values in the board
+        private ushort _nRows = 15;
+        private ushort _nCols = 15;
+        private float _density = 0.15f; //the approximate proportion of non-zero values in the board
         public ushort NRows
         {
             get => _nRows;
@@ -41,15 +41,20 @@ namespace Minesweeper.Classes
                 values[i] = new Cell[_nCols];
             }
 
+            //Populate bombs
             for (uint i = 0; i < _nRows; ++i)
             {
                 for (uint j = 0; j < _nCols; ++j)
                 {
-                    values[i][j] = new Cell(_density);
+                    values[i][j] = new Cell(_density, (ushort)i, (ushort)j);
                 }
             }
 
-            return new Board(values);
+            //Calculate non-bomb adjacent values
+            Board board = new(values);
+            board.PopulateCellValues();
+
+            return board;
         }
     }
 }

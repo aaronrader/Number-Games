@@ -4,7 +4,7 @@ import "../style/gameBoard.css"
 
 export default function NumSumsBoard(props) {
     return (
-        <div className='table'>
+        <div className='nsTable'>
             <table>
                 <tbody>
                     <tr>
